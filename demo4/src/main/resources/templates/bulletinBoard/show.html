@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" th:href="@{/css/show.css}" />
+	<link rel="stylesheet" th:href="@{/css/header.css}" />
+	<meta charset="UTF-8">
+	
+	<title>掲示板詳細</title>
+</head>
+
+<body>
+<div th:replace="common/header :: headerFragment"></div>
+
+<h1>掲示板詳細</h1>
+<table border="1">
+  <tr>
+      <th class="col_title">タイトル</th>
+      <td class="col_data" th:text="${formModel.title}"></td>
+  </tr>
+  <tr>
+      <th>内容</th>
+      <td class="col_data" th:text="${formModel.content}"></td>
+  </tr>
+  <tr>
+      <th>作成者</th>
+      <td class="col_data" th:text="${formModel.createUser}"></td>
+  </tr>  
+  <tr>
+      <th>作成日</th>
+      <td class="col_data" th:text="${#dates.format(formModel.createDate, 'yyyy/MM/dd')}"></td>
+  </tr>
+</table>
+<hr>
+<form action="/edit" method="get">
+    <input type="submit" value="編集">
+    <input type="hidden" name="id" th:value="${formModel.id}">
+</form>
+<form action="/list" method="get">
+    <input type="submit" value="戻　る" />
+</form>
+</body>
+</html>

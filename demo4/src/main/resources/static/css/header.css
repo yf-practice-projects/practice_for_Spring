@@ -1,0 +1,31 @@
+.common-header {
+    background-color: #333;
+    padding: 1rem;
+    text-align: right;
+}
+
+.logout-container {
+    display: inline-flex;
+    align-items: center;
+
+}
+
+.user-name {
+    color: #fff;
+    padding: 8px;
+}
+
+.logout-button {
+    color: #fff;
+    background-color: #007BFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,70 @@
+@SpringBootApplicationアノテーション
+@SpringBootApplicationアノテーションを記述することで特別な設定ファイルを
+用意しなくても、このプログラムはSpringBootとして実行可能になります。
+
+@RestControllerアノテーション
+@RestControllerを記述することで、このクラスがWEBアプリケーションとして
+操作できるコントローラプログラムとして動作できるようになります。
+
+@RequestMappingアノテーション
+@RequestMappingは、リクエストを受けたときの処理を記述します。
+このプログラムの場合、"/"（ルート）にアクセスが来た場合の処理です。
+
+例）
+@RequestMapping("/")     →  http://localhost:8080/でアクセスされた場合
+@RequestMapping("/user") →  http://localhost:8080/user/でアクセスされた場合
+
+Modelクラス
+Modelクラスとは、Webページで使用するデータを管理するクラスです。
+
+addAttribute
+addAttributeは、第一引数で名前を、第二引数で値を設定します。
+ビュー側で第一引数で指定した名前でデータを取り出します。
+
+th:text="${変数名}"
+th:textはTymeleafの構文です。
+変数名にはコントローラで指定したModelのaddAttributeで指定した名前を指定
+することで、コントローラーで指定した値をビューに埋め込むことができます。
+
+ModelとModelAndView
+Modelは戻り値を持たないため、ビューから値が返ってくる場合には、 ModelAndViewを使用します。
+ModelAndViewを返すので、html名をsetViewNameで指定します。
+
+@RequestMapping(value="/", method=RequestMethod.GET)
+@GetMapping("/")
+@RequestMapping(value="/", method=RequestMethod.POST)
+@PostMapping("/")
+
+@Entity	エンティティクラスとしてクラスを定義
+@Table(name="user")	エンティティクラスに割り当てられるテーブル名
+@Id	プライマリキーを指定
+@GeneratedValue(strategy = GenerationType.AUTO)	AUTO：プライマリキーの値を自動採番する
+@Column	カラム名　※以下の指定も可
+name：カラム名を指定
+length：最大長を指定
+nullable：nullを許可するか否か
+
+日付設定を行う場合Date型とString型の2パターンある。
+1)Dateにした場合
+・コントローラーでそのまま日付を設定
+model.setCreateDate(new Date());
+・ビューでユーティリティで編集して表示します。
+<td th:text="${#dates.format(obj.date, 'yyyy/MM/dd')}">
+
+2)Stringにした場合
+・コントローラでSimpleDateFormatで編集してDB更新します。
+public ModelAndView save(
+  			@ModelAttribute("model") Model model {
+    Date date = new Date();
+    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+    model.setCreateDate(sdf1.format(date));
+    repos.saveAndFlush(model);
+    return new ModelAndView("redirect:/");
+}
+・ビューではそのまま表示します。
+<td th:text="${obj.date}">
+
+
+Thymeleaf上での@の意味　例）@{/login}
+@ : 現在のアプリケーションのコンテキストパスに関連するURLを作成することを示す。
+/login : 解決されるべき具体的なパス。

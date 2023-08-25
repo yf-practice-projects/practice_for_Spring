@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+</head>
+<body>
+    <div th:fragment="headerFragment">
+    	<div class="common-header">
+	      <div class="logout-container">
+	      	<div class="user-name" th:text="${loginUser.name}"></div>
+	        <form th:action="@{/logout}" method="post">
+			        <input type="submit" value="ログアウト" class="logout-button" />
+			    </form>
+	      </div>
+	  	</div>
+    </div>
+</body>
+</html>

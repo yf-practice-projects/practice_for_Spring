@@ -1,0 +1,6 @@
+table {
+  border-collapse: collapse;
+}
+.col_title {width:200px;}
+.col_data {width:400px;}
+form {display: inline;}
