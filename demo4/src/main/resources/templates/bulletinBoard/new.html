@@ -3,14 +3,15 @@
 <head>
 	<link rel="stylesheet" th:href="@{/css/new.css}" />
 	<link rel="stylesheet" th:href="@{/css/header.css}" />
+	<script th:src="@{/js/editPage.js}"></script>
 	<meta charset="UTF-8">
 	<title>掲示板登録</title>
 </head>
 <body>
-<div th:replace="common/header :: headerFragment"></div>
+<div th:replace="~{common/header :: headerFragment}"></div>
 
 <h1>掲示板登録</h1>
-<form method="post" th:action="@{/create}" th:object="${formModel}">
+<form method="post" th:action="@{/create}" th:object="${formModel}" enctype="multipart/form-data">
 <input type="hidden" name="id" th:value="*{id}">
 <table border="1">
   <tr>
@@ -26,6 +27,14 @@
         <input type="text" name="content" th:value="*{content}" size="40"
           maxlength="40" />
       </td>
+  </tr>
+  <tr>
+    <th>ファイル</th>
+    <td>
+      <input type="file" name="file" onchange="displayImage(this)">
+      <img id="selectedImage" src="#" width="300" height="200" alt="Selected Image" style="display:none;"/>
+      
+    </td>
   </tr>
   <tr>
       <th>作成者</th>

@@ -33,7 +33,8 @@ public class MySecurityConfig {
 				.logoutUrl("/logout"))
 		.authorizeHttpRequests(authz -> authz
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-//			.requestMatchers(new AntPathRequestMatcher("/list")).hasRole("USER")
+			.requestMatchers(new AntPathRequestMatcher("/list")).hasRole("USER")
+			.requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
 			.requestMatchers(new AntPathRequestMatcher("/signUp")).permitAll()	// "/signUp"はログインなしでもアクセス可能にする
 			.anyRequest().authenticated()										// 他のURLはログイン後のみアクセス可能
 		)

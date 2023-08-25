@@ -4,3 +4,10 @@ table {
 .col_title {width:200px;}
 .col_data {width:400px;}
 form {display: inline;}
+
+.selectedImage {
+    width: 300px;
+    height: auto;
+
+}
+

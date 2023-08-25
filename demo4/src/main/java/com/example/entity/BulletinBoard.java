@@ -29,6 +29,9 @@ public class BulletinBoard {
     private String content;
     
     @Column
+    private String fileName;
+    
+    @Column
     private String createUser;
     
     @Column

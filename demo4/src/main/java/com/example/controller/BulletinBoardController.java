@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.entity.BulletinBoard;
 import com.example.repository.BulletinBoardRepository;
+import com.example.service.BulletinBoardService;
 
 
 @Controller
@@ -22,6 +23,9 @@ public class BulletinBoardController {
 	
 	@Autowired
 	BulletinBoardRepository repos; 
+	
+	@Autowired
+	BulletinBoardService bulletinBoardService;
 	
 //	@GetMapping("/")
 //	public String redirectToLoginForm() {
@@ -70,9 +74,8 @@ public class BulletinBoardController {
 	@PostMapping("/create")
 	@Transactional(readOnly=false)
 	public ModelAndView save(
-			@ModelAttribute("formModel") BulletinBoard bulletinBoard) {
-		bulletinBoard.setCreateDate(new Date());
-		repos.saveAndFlush(bulletinBoard);
+			@ModelAttribute("formModel") BulletinBoard bulletinBoard ,@RequestParam("file") MultipartFile fileName) {
+		bulletinBoardService.saveBulletin(bulletinBoard,fileName);
 		return new ModelAndView("redirect:/list");
 	}
 	
