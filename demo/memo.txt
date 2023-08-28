@@ -68,3 +68,8 @@ public ModelAndView save(
 Thymeleaf上での@の意味　例）@{/login}
 @ : 現在のアプリケーションのコンテキストパスに関連するURLを作成することを示す。
 /login : 解決されるべき具体的なパス。
+
+
+@RestController is the combination of @Controller and @ResponseBody.
+Flow of request in a @Controller class without using a @ResponseBody annotation:
+https://stackoverflow.com/questions/25242321/difference-between-spring-controller-and-restcontroller-annotation

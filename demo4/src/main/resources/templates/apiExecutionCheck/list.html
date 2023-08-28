@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link rel="stylesheet" th:href="@{/css/list.css}" />
+	<link rel="stylesheet" th:href="@{/css/header.css}" />
+	<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script th:src="@{/js/jqueryScript.js}"></script>
+	<title>掲示板</title>
+</head>
+<body>
+
+<div th:replace="~{common/header :: headerFragment}"></div>
+
+<h1>掲示板 -API-</h1>
+
+<h2>Jquery</h2>
+<table border="1">
+    <tr>
+        <th class="col_title">タイトル</th>
+        <th class="col_content">内容</th>
+        <th class="col_createUser">作成者</th>
+        <th class="col_createDate">作成日></th>
+        <th></th>
+    </tr>
+    <tr id="dataList">
+    </tr>
+</table>
+<hr>
+<form action="/add">
+    <input type="submit" value="新規追加" />
+</form>
+</body>
+</html>

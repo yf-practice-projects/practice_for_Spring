@@ -27,11 +27,11 @@ public class BulletinBoardController {
 	@Autowired
 	BulletinBoardService bulletinBoardService;
 	
-//	@GetMapping("/")
-//	public String redirectToLoginForm() {
-//		return "redirect:/loginForm"; 
-//	}
-//	
+	@GetMapping("/")
+	public String redirectToLoginForm() {
+		return "redirect:/loginForm"; 
+	}
+	
 	@GetMapping("/list")
 	public ModelAndView list(Authentication authentication) {
 		ModelAndView mav = new ModelAndView();
@@ -67,6 +67,11 @@ public class BulletinBoardController {
 		mav.addObject("formModel", data);
 		mav.setViewName("bulletinBoard/show");
 		return mav;
+	}
+	
+	@GetMapping("/apiExecutionCheck/list")
+	public String restList() {
+		return "apiExecutionCheck/list";
 	}
 	
 	
