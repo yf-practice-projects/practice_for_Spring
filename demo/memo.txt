@@ -73,3 +73,14 @@ Thymeleaf上での@の意味　例）@{/login}
 @RestController is the combination of @Controller and @ResponseBody.
 Flow of request in a @Controller class without using a @ResponseBody annotation:
 https://stackoverflow.com/questions/25242321/difference-between-spring-controller-and-restcontroller-annotation
+
+
+メソッドの引数に[@PathVariable　型　変数名]を設定することでrequestMappingのURLで指定した値を取得できる。
+ex)
+@GetMapping(/hoge/{huga})
+public void test(@PathVariable int huga){}
+
+メソッドの引数にAuthenticationを指定するとログインユーザー情報を取得可能
+ex) public void test(Authentication authentication){}
+
+RequestMapping時のメソッドの引数に[@RequestParam 型 変数名]で遷移の指定パラメータを取得可能

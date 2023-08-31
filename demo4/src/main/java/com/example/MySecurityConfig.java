@@ -18,8 +18,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity
 public class MySecurityConfig {
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		// 設定内容
 		http.formLogin(login -> login.loginProcessingUrl("/login")	// ユーザーIｄ・パスワード送信先URL

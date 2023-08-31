@@ -1,7 +1,6 @@
 package com.example.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,29 +9,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
 @Entity
-@Table(name="bulletin")
-public class BulletinBoard {
+@Table(name="bulletin_comment")
+public class BulletinComment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private int id;
     
     @Column
-    private String title;
+    private String comment;
     
-    @Column
-    private String content;
-    
-    @Column
-    private String fileName;
+    @ManyToOne
+    @JoinColumn(name = "bulletin_id")
+    private BulletinBoard bulletinBoard;
     
     @ManyToOne
     @JoinColumn(name = "user_id" ,nullable = true)
@@ -40,8 +35,5 @@ public class BulletinBoard {
     
     @Column
     private Date createDate;
-    
-    
-    @OneToMany(mappedBy = "bulletinBoard")
-    private List<BulletinComment> comments;
+
 }

@@ -21,14 +21,22 @@
       <th>内容</th>
       <td class="col_data" th:text="${formModel.content}"></td>
   </tr>
+	<tr>
+	    <th>ファイル</th>
+	    <td class="col_data">
+	    	<img id="selectedImage" th:src="${formModel.fileName}" width="300" height="200" alt="No File" style="display:block;"/>
+	    </td>
+	</tr>
   <tr>
       <th>作成者</th>
-      <td class="col_data" th:text="${formModel.createUser}"></td>
+      <td class="col_data" th:text="${formModel.user.name}"></td>
   </tr>  
   <tr>
       <th>作成日</th>
       <td class="col_data" th:text="${#dates.format(formModel.createDate, 'yyyy/MM/dd')}"></td>
   </tr>
+
+  
 </table>
 <hr>
 <form action="/edit" method="get">

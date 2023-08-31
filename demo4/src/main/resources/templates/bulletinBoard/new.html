@@ -4,6 +4,7 @@
 	<link rel="stylesheet" th:href="@{/css/new.css}" />
 	<link rel="stylesheet" th:href="@{/css/header.css}" />
 	<script th:src="@{/js/editPage.js}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<meta charset="UTF-8">
 	<title>掲示板登録</title>
 </head>
@@ -31,17 +32,10 @@
   <tr>
     <th>ファイル</th>
     <td>
-      <input type="file" name="file" onchange="displayImage(this)">
-      <img id="selectedImage" src="#" width="300" height="200" alt="Selected Image" style="display:none;"/>
+      <input type="file" name="file" onchange="displayImage(this)" />
+      <img id="selectedImage" th:src="*{fileName}"  width="300" height="200" alt="Selected Image" style="display:none;"/>
       
     </td>
-  </tr>
-  <tr>
-      <th>作成者</th>
-      <td>
-        <input type="text" name="createUser" th:value="*{createUser}" size="15"
-           maxlength= "15" />
-      </td>
   </tr>
 </table>
 <hr>

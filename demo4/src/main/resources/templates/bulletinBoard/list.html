@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" th:href="@{/css/list.css}" />
 	<link rel="stylesheet" th:href="@{/css/header.css}" />
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<meta charset="UTF-8">
 	<title>掲示板</title>
 </head>
@@ -23,7 +24,7 @@
     <tr th:each="obj : ${data}">
         <td th:text="${obj.title}"></td>
         <td th:text="${obj.content}"></td>
-        <td th:text="${obj.createUser}"></td>
+        <td th:text="${obj.user.name}"></td>
         <td th:text="${#dates.format(obj.createDate, 'yyyy/MM/dd')}">
         <td>
             <form action="/show" method="get">

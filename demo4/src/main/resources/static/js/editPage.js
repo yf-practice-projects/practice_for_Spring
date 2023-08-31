@@ -11,3 +11,11 @@ function displayImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+window.onload = function(){
+	var imgPath = $('#selectedImage').attr('src')
+		if(imgPath != "#") {
+			$('#selectedImage').show();
+		}
+};
+		

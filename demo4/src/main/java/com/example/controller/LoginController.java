@@ -1,6 +1,8 @@
 package com.example.controller;
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.entity.BulletinBoard;
 import com.example.entity.User;
+import com.example.repository.BulletinBoardRepository;
 import com.example.repository.UserRepository;
 import com.example.service.LoginUserDetailsService;
 
@@ -28,7 +32,8 @@ public class LoginController {
 
 	@Autowired
 	UserRepository userRepos;
-	
+	@Autowired
+	BulletinBoardRepository repos; 
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
@@ -82,6 +87,13 @@ public class LoginController {
         user1.setName("デモ");
         user1.setEncodedPassword(passwordEncoder.encode("demo"));
         userRepos.saveAndFlush(user1);
+        BulletinBoard data = new BulletinBoard();
+		data.setTitle("初期1");
+		data.setContent("初期内容");
+		data.setFileName("20230829120035_pexels-alex-kozlov-7690275.jpg");
+		data.setUser(user1);
+		data.setCreateDate(new Date());
+		repos.saveAndFlush(data);
     }
 	
 }
