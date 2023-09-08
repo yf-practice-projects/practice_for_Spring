@@ -1,16 +1,12 @@
 package com.example.controller;
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +35,6 @@ public class LoginController {
 	
 	private final LoginUserDetailsService loginUserDetailsService;
 	
-	@Autowired
 	public LoginController(LoginUserDetailsService loginUserDetailsService) {
 	    this.loginUserDetailsService = loginUserDetailsService;
 	}
@@ -87,13 +82,6 @@ public class LoginController {
         user1.setName("デモ");
         user1.setEncodedPassword(passwordEncoder.encode("demo"));
         userRepos.saveAndFlush(user1);
-        BulletinBoard data = new BulletinBoard();
-		data.setTitle("初期1");
-		data.setContent("初期内容");
-		data.setFileName("20230829120035_pexels-alex-kozlov-7690275.jpg");
-		data.setUser(user1);
-		data.setCreateDate(new Date());
-		repos.saveAndFlush(data);
     }
 	
 }

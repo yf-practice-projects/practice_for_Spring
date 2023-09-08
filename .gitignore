@@ -1,1 +1,7 @@
 /.metadata/
+*/node_modules
+log.log
+*/react-component/dist
+test_folder/
+*.lnk
+*/react-component/.gitignore

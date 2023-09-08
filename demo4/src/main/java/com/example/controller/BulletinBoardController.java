@@ -101,19 +101,4 @@ public class BulletinBoardController {
 		repos.deleteById(id);
 		return new ModelAndView("redirect:/list");
 	}
-	
-//	@PostConstruct
-//	public void init() {
-//		BulletinBoard data = new BulletinBoard();
-//		data.setTitle("初期1");
-//		data.setContent("初期内容");
-//		data.setFileName("20230829120035_pexels-alex-kozlov-7690275.jpg");
-//		User user = new User();
-//		user.setUserId("demo");
-//		user.setName("デモ");
-//		user.setEncodedPassword(passwordEncoder.encode("demo"));
-//		data.setUser(user);
-//		data.setCreateDate(new Date());
-//		repos.saveAndFlush(data);
-//	}
 }

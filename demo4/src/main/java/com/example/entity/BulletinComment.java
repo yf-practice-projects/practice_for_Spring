@@ -1,6 +1,7 @@
 package com.example.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,13 +28,15 @@ public class BulletinComment {
     
     @ManyToOne
     @JoinColumn(name = "bulletin_id")
+    @JsonManagedReference
     private BulletinBoard bulletinBoard;
     
     @ManyToOne
     @JoinColumn(name = "user_id" ,nullable = true)
+    @JsonManagedReference
     private User user;
     
     @Column
-    private Date createDate;
+    private LocalDateTime createDate;
 
 }

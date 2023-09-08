@@ -2,6 +2,9 @@ package com.example.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -21,11 +24,16 @@ public class User {
     @Column
     private String name;
     @Column
+    @JsonIgnore
     private String encodedPassword;
     
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private List<BulletinBoard> bulletins;
     
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    private List<BulletinComment> comment;
     
     public String getEncodedPassword() {
         return encodedPassword;

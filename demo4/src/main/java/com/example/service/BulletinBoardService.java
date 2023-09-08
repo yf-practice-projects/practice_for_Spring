@@ -7,8 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Base64;
-import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +49,10 @@ public class BulletinBoardService {
 			bulletinBoard.setFileName(createFileName(file));
 			User user = loginUserDetails.getUser();
 			bulletinBoard.setUser(user);
-			bulletinBoard.setCreateDate(new Date());
+			bulletinBoard.setCreateDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
 			repos.saveAndFlush(bulletinBoard);
 			if(StringUtils.isNotEmpty(bulletinBoard.getFileName())){
-				saveFile(file);
+				saveFile(file, bulletinBoard.getFileName());
 			}
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
@@ -82,7 +82,7 @@ public class BulletinBoardService {
 	private String createFileName(MultipartFile file) {
 //	    int dotIndex = file.getOriginalFilename().lastIndexOf('.');
 //	    if (dotIndex == -1) {
-		if(StringUtils.isEmpty(file.getName())) {
+		if(StringUtils.isNotEmpty(file.getName())) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 	        return LocalDateTime.now().format(formatter) + "_" + file.getOriginalFilename();
 		}
@@ -95,8 +95,7 @@ public class BulletinBoardService {
 	 * ファイル保存
 	 * @param file
 	 */
-	private void saveFile(MultipartFile file) {
-		String fileName = createFileName(file);
+	private void saveFile(MultipartFile file, String fileName) {
 		try {
 			StringBuilder savePath = new StringBuilder(WIN_PATH);
 		    if (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {

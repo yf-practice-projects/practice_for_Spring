@@ -1,7 +1,9 @@
 package com.example.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,9 +41,10 @@ public class BulletinBoard {
     private User user;
     
     @Column
-    private Date createDate;
+    private LocalDateTime createDate;
     
     
     @OneToMany(mappedBy = "bulletinBoard")
+    @JsonBackReference
     private List<BulletinComment> comments;
 }

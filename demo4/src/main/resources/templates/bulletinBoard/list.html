@@ -18,14 +18,14 @@
         <th class="col_title">タイトル</th>
         <th class="col_content">内容</th>
         <th class="col_createUser">作成者</th>
-        <th class="col_createDate">作成日></th>
+        <th class="col_createDate">作成日</th>
         <th></th>
     </tr>
     <tr th:each="obj : ${data}">
         <td th:text="${obj.title}"></td>
         <td th:text="${obj.content}"></td>
         <td th:text="${obj.user.name}"></td>
-        <td th:text="${#dates.format(obj.createDate, 'yyyy/MM/dd')}">
+        <td th:text="${#temporals.format(obj.createDate, 'yyyy/MM/dd　HH:mm')}">
         <td>
             <form action="/show" method="get">
                 <input type="submit" value="詳細">

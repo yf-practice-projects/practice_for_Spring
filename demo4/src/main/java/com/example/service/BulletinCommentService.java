@@ -22,7 +22,14 @@ public class BulletinCommentService {
 	
 	
 	public boolean addComment(BulletinComment comment) {
-		commentRepo.saveAndFlush(comment);
+		try {
+			commentRepo.saveAndFlush(comment);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		
 		return true;
 	}
 	
