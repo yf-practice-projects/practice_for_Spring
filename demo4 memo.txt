@@ -1,0 +1,20 @@
+
+・dbでpostgersqlを使用するが、ローカル環境にposgresqlは落としてない。
+　docker-comporse.ymlを置いているフォルダで以下コマンド実行してコンテナ作成/起動を行う(dockerDesktop起動済み前提)。
+　docker-comporse up -d
+
+・別PCでGitからdemo4を落とした場合、
+　react-componentフォルダにnode_modulesが存在しないためreact-componentフォルダ配下で以下コマンドを実行
+　npm install
+
+・reactを非同期処理用の1パーツとしてthmymeleaf内に突っ込んでいる。
+　nodejsでサーバー起動してフロント側を表示しているわけではない。
+　なのでreact-componentフォルダ配下でtsファイルを配置したり編集した場合は以下を行う。
+  1. cd react-component
+  2. npm run build:dev
+     ビルドコマンドはpackage.jsonにかかれている。
+	 ビルドするファイルはwebpack.configのentryにかかれている。
+　3. react-component/dist内にビルドして吐かれたjsファイルを以下に置く。
+     demo4\src\main\resources\static\js\react
+
+・jsでリターンしたコンポーネントのcssは表示するhtml内で指定している
