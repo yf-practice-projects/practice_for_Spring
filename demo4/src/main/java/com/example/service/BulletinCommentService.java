@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.myPageCommentViewDto;
 import com.example.entity.BulletinComment;
+import com.example.model.MyPageCommentModel;
 import com.example.repository.BulletinCommentRepository;
 
 @Service
@@ -26,11 +28,25 @@ public class BulletinCommentService {
 	 * @param userId
 	 * @return
 	 */
-	public List<myPageCommentViewDto> findMyComment(String userId) {
+	public List<MyPageCommentModel> findMyComment(String userId) {
 		List<myPageCommentViewDto> list = commentRepo.findByUser_userId(userId);
-		
-		return list;
+		List<MyPageCommentModel> modelList = new ArrayList<MyPageCommentModel>();
+		list.forEach(dto -> {
+			modelList.add(convertDtoToModel(dto));
+		});
+		return modelList;
 	}
+	
+	private MyPageCommentModel convertDtoToModel(myPageCommentViewDto dto) {
+		MyPageCommentModel model = new MyPageCommentModel();
+		model.setId(dto.getId());
+		model.setComment(dto.getComment());
+		model.setBulletinId(dto.getBulletinBoard_id());
+		model.setBulletinTitle(dto.getBulletinBoard_title());
+		model.setCreateDate(dto.getCreateDate());
+		return model;
+	}
+	
 	
 	
 	

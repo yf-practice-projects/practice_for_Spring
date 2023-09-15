@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.LoginUserDetails;
 import com.example.entity.BulletinBoard;
 import com.example.entity.User;
+import com.example.model.MyPageBulletinModel;
 import com.example.repository.BulletinBoardRepository;
 
 import io.micrometer.common.util.StringUtils;
@@ -80,9 +82,22 @@ public class BulletinBoardService {
 	 * @param userId
 	 * @return
 	 */
-	public List<BulletinBoard> findMyBulletin(String userId) {
+	public List<MyPageBulletinModel> findMyBulletin(String userId) {
 		List<BulletinBoard> list = repos.findByUser_userId(userId);
-		return list;
+		List<MyPageBulletinModel> modelList = new ArrayList<MyPageBulletinModel>();
+		list.forEach(dto ->{
+			modelList.add(convertDtoToModel(dto));
+		});
+		return modelList;
+	}
+	
+	private MyPageBulletinModel convertDtoToModel(BulletinBoard dto) {
+		MyPageBulletinModel model = new MyPageBulletinModel();
+		model.setId(dto.getId());
+		model.setTitle(dto.getTitle());
+		model.setContent(dto.getContent());
+		model.setCreateDate(dto.getCreateDate());
+		return model;
 	}
 	
 	/**

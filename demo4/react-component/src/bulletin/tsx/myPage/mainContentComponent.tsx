@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { StrictMode, useEffect, useState } from "react";
 import { MyPageProps, MyComment, Bulletin} from "../../ts/myPageComponentType";
 import { MyBulletinListComp } from "./myBulletinListComponent";
 import { MyCommentListComp } from "./myCommentListComponent";
@@ -8,45 +8,33 @@ import axios from "axios";
 
 export const MainContentComp: React.FC<MyPageProps> = ({ activeButton, myDetail }) => {
 
-	const [bulletinList, setBulletinList] = useState<Bulletin[] | undefined>();
+	const [bulletinList, setBulletinList] = useState<Bulletin[]>();
 	const [comments, setComments] = useState<MyComment[]>();
 
 	var urlOrigin: string = new URL(window.location.origin).toString();
 
 	useEffect(() => {
-		axios.get<Bulletin[]>(urlOrigin + "api/myPage/myBulletinList").then(response => {
-			setBulletinList(response.data);
-		}).catch(error => {
-			console.error("API error:", error);
-		})
-	},[activeButton === "myBulletin"])
-
-	useEffect(() => {
-		axios.get<MyComment[]>(urlOrigin + "api/myPage/myCommentList").then(response => {
-			setComments(response.data);
-		}).catch(error => {
-			console.error("API error:", error);
-		})
-	},[activeButton === "myComment"])
-
-	if (activeButton === "myBulletin") {
-		return (
-		  <div className='content-area' >
-				<MyBulletinListComp bulletins={bulletinList} />
-		  </div>
-		)
-	  } else if (activeButton === "myComment") {
-			return (
-				<div className='content-area' >
-					<MyCommentListComp userDetail={myDetail} />
-				</div>
-			)
-	  }
-	  
+		if (activeButton === "myBulletin") {
+			axios.get<Bulletin[]>(urlOrigin + "api/myPage/myBulletinList").then(response => {
+				setBulletinList(response.data);
+			}).catch(error => {
+				console.error("API error:", error);
+			})
+		} else if (activeButton === "myComment") {
+			axios.get<MyComment[]>(urlOrigin + "api/myPage/myCommentList").then(response => {
+				setComments(response.data);
+			}).catch(error => {
+				console.error("API error:", error);
+			})
+		}
+	},[activeButton])
+	
 	return (
 		<>
 			<div className='content-area' >
-				<UserDetailComp userDetail={myDetail} />
+				{activeButton === "userDetails" && <UserDetailComp userDetail={myDetail} />}
+				{activeButton === "myBulletin" && <MyBulletinListComp bulletins={bulletinList} />}
+				{activeButton === "myComment" && <MyCommentListComp myComments={comments} />}
 				<MemoizedMapComponent />
 			</div>
 		</>

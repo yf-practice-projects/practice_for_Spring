@@ -19,7 +19,7 @@ export type Bulletin = {
 export type MyComment = {
 	id: number;
 	comment: string;
-	bulletinBoard_id: number;
-	bulletinBoard_title: string;
+	bulletinId: number;
+	bulletinTitle: string;
 	createDate: Date;
 }
