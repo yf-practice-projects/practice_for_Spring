@@ -1,7 +1,8 @@
 /.metadata/
 */node_modules
-log.log
+log.log*
 */react-component/dist
 test_folder/
 *.lnk
 */react-component/.gitignore
+**/external-config.properties

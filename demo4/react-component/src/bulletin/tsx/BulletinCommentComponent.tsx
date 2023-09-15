@@ -2,7 +2,7 @@ import { useState, useEffect, Fragment } from "react";
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
 
-export function CommentComp() {
+export const CommentComp : React.FC = () => {
   type Comment = {
     id?: number;
     comment?: string;
@@ -22,8 +22,6 @@ export function CommentComp() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<Comment>({comment: "", bulletinId: searchParams.get("id")});
 
-  
-
   useEffect(() => {
     // コメントを取得する
     axios.get<Comment[]>(urlOrigin + "api/bulletinComment/list" + search).then(response => {
@@ -34,7 +32,7 @@ export function CommentComp() {
     });
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     var csrfToken = document.querySelector('input[name="_csrf"]');
     axios.post(urlOrigin + "api/bulletinComment/add", newComment, {
       headers: {
@@ -55,7 +53,7 @@ export function CommentComp() {
 
   return (
     <div className="comment-component">
-      <textarea value={newComment.comment} onChange={e => setNewComment({ comment:e.target.value,bulletinId: searchParams.get("id") })} />
+      <textarea value={newComment.comment} onChange={(e:React.ChangeEvent<HTMLTextAreaElement>):void => setNewComment({ comment: e.target.value, bulletinId: searchParams.get("id") })} />
       <button onClick={handleSubmit}>投稿</button>
       <div className="comment-list">
         {comments.map((comment) => (

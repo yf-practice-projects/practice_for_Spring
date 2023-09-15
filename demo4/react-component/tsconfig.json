@@ -6,6 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "paths": {
+      "*": ["./ts/global.d.ts"]
+    },
     "alwaysStrict": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
@@ -29,7 +32,7 @@
     "strictNullChecks": true
   },
   "include": [
-    "src/**/*.tsx", "src/**/*.ts", "src/bulletin/tsx/*.tsx"
-  ]
+    "src/bulletin/tsx/**/*.tsx","src/bulletin/ts/*.ts","src/bulletin/ts/*.d.ts"
+, "src/bulletin/tsx/myPage/userDetailComponent.tsx"  ]
 }
 

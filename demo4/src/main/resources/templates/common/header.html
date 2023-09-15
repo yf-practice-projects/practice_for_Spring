@@ -6,8 +6,13 @@
 <body>
     <div th:fragment="headerFragment">
     	<div class="common-header">
+				<a th:href="@{/list}">
+					<div>TOP</div>
+				</a>	
 	      <div class="logout-container">
-	      	<div class="user-name" th:text="${loginUser.name}"></div>
+	      	<a th:href="@{/myPage}">
+	      		<div class="user-name" th:text="${loginUser.name}"></div>
+	      	</a>
 	        <form th:action="@{/logout}" method="post">
 			        <input type="submit" value="ログアウト" class="logout-button" />
 			    </form>

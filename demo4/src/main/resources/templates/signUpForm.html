@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
@@ -16,6 +17,6 @@
         <input type="password" id="password" name="encodedPassword" th:value="*{encodedPassword}"><br>
         <button type="submit">登録</button>
     </form>
-    <a href="/login">ログイン画面</a>
+    <a href="/loginForm">ログイン画面</a>
 </body>
 </html>

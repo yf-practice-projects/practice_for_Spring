@@ -18,3 +18,8 @@
      demo4\src\main\resources\static\js\react
 
 ・jsでリターンしたコンポーネントのcssは表示するhtml内で指定している
+
+
+[special thanks]
+・google map api表示
+　https://asameshicode.com/custom-google-map/

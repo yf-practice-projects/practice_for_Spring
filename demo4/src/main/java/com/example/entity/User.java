@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -17,8 +18,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="users")
-public class User {
-    @Id
+public class User implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @Column
     private String userId;
     @Column

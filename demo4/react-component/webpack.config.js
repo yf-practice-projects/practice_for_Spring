@@ -12,8 +12,11 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 
 const config = {
     entry: {
-        sample: './src/index.tsx',
-        bulletinComment: './src/bulletin/tsx/BulletinComment.tsx'},
+        // sample: './src/index.tsx',
+        bulletinComment: './src/bulletin/tsx/BulletinComment.tsx',
+        myPage: './src/bulletin/tsx/myPage.tsx'
+    },
+    
     output: {
         path: path.resolve(__dirname, 'dist'),
     },

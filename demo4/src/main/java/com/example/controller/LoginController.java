@@ -1,10 +1,14 @@
 package com.example.controller;
 
 
-import java.time.LocalDateTime;
+import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.entity.BulletinBoard;
 import com.example.entity.User;
 import com.example.repository.BulletinBoardRepository;
 import com.example.repository.UserRepository;
@@ -26,6 +29,7 @@ import jakarta.annotation.PostConstruct;
 @Controller
 public class LoginController {
 
+	
 	@Autowired
 	UserRepository userRepos;
 	@Autowired
@@ -61,18 +65,18 @@ public class LoginController {
 		String beforePass = user.getEncodedPassword();
 		user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
 		userRepos.saveAndFlush(user);
-		
-		autoLogin(user.getUserId(), beforePass);
+//		loginUserDetailsService.registerAutoLogin(user);
+//		autoLogin(user.getUserId(), beforePass);
 		return new ModelAndView("redirect:/list");
 	}
-	private void autoLogin(String userid, String password) {
-	    UserDetails userDetails = loginUserDetailsService.loadUserByUsername(userid);
-	    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-
-	    if (token.isAuthenticated()) {
-	        SecurityContextHolder.getContext().setAuthentication(token);
-	    }
-	}
+//	private void autoLogin(String userid, String password) {
+//		UserDetails userDetails = loginUserDetailsService.loadUserByUsername(userid);
+//	    UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+//	    token.getPrincipal();
+//	    if (token.isAuthenticated()) {
+//	        SecurityContextHolder.getContext().setAuthentication(token);
+//	    }
+//	}
 	
 	/* 初期データ作成 ユーザ:demo パスワード:demo */
     @PostConstruct
