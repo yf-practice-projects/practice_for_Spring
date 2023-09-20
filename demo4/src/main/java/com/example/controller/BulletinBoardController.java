@@ -8,6 +8,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,9 +89,17 @@ public class BulletinBoardController {
 	@PostMapping("/create")
 	@Transactional(readOnly=false)
 	public ModelAndView save(
-			@ModelAttribute("formModel") BulletinBoard bulletinBoard, 
 			@RequestParam("file") MultipartFile fileName, 
-			@AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+			@Validated @ModelAttribute("formModel") BulletinBoard bulletinBoard, BindingResult result,
+			@AuthenticationPrincipal LoginUserDetails loginUserDetails
+			) {
+		if(result.hasErrors()) {
+			ModelAndView mav = new ModelAndView();
+			bulletinBoard.setFileName("#");
+			mav.addObject("formModel", bulletinBoard);
+			mav.setViewName("bulletinBoard/new");
+			return mav;
+		}
 		bulletinBoardService.saveBulletin(bulletinBoard,fileName,loginUserDetails);
 		return new ModelAndView("redirect:/list");
 	}

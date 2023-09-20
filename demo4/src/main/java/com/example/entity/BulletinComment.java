@@ -1,6 +1,9 @@
 package com.example.entity;
 
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -27,16 +30,19 @@ public class BulletinComment {
     private String comment;
     
     @ManyToOne
-    @JoinColumn(name = "bulletin_id")
+    @JoinColumn(name = "bulletin_id", nullable = true)
     @JsonManagedReference
     private BulletinBoard bulletinBoard;
     
     @ManyToOne
-    @JoinColumn(name = "user_id" ,nullable = true)
+    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = true)
     @JsonManagedReference
     private User user;
     
     @Column
     private LocalDateTime createDate;
+    
+    @Column
+    private boolean deleteFlag = false;
 
 }

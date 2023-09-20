@@ -14,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,9 +30,13 @@ public class BulletinBoard {
     private int id;
     
     @Column
+	@NotEmpty(message = "タイトルを入力してください")
+	@Size(max = 100, message = "100文字以内で入力してください")
     private String title;
     
     @Column
+	@NotEmpty(message = "内容を入力してください")
+	@Size(max = 500, message = "500文字以内で入力してください")
     private String content;
     
     @Column

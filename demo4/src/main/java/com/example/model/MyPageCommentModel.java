@@ -11,4 +11,5 @@ public class MyPageCommentModel {
 	private int bulletinId;
 	private String bulletinTitle;
 	private LocalDateTime createDate;
+	private boolean deleteFlag;
 }

@@ -8,4 +8,5 @@ public interface myPageCommentViewDto {
 	int getBulletinBoard_id();
 	String getBulletinBoard_title();
 	LocalDateTime getCreateDate();
+	boolean getDeleteFlag();
 }

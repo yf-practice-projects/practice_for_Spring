@@ -22,4 +22,5 @@ export type MyComment = {
 	bulletinId: number;
 	bulletinTitle: string;
 	createDate: Date;
+	deleteFlag: boolean;
 }

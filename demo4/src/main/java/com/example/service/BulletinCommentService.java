@@ -44,6 +44,7 @@ public class BulletinCommentService {
 		model.setBulletinId(dto.getBulletinBoard_id());
 		model.setBulletinTitle(dto.getBulletinBoard_title());
 		model.setCreateDate(dto.getCreateDate());
+		model.setDeleteFlag(dto.getDeleteFlag());
 		return model;
 	}
 	
@@ -62,18 +63,15 @@ public class BulletinCommentService {
 			e.printStackTrace();
 			return false;
 		}
-		
-		
 		return true;
 	}
 	
 	/**
 	 * コメント削除
-	 * 使わないかも
+	 * 
 	 * @return
 	 */
-	public boolean deleteComment(){
-		commentRepo.deleteAllById(null);
-		return true;
+	public int deleteComment(int commentId, String userId){
+		return commentRepo.deleteByCommentIdAndUserId(commentId, userId);
 	}
 }

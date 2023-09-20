@@ -29,16 +29,6 @@ html, body {
   background    : #330033;     /* 文字色     */
 }
 
-/*.mainWrapper {
-    background: var(--color-background);
-    display: flex;
-    gap: 56px;
-    -webkit-box-pack: center;
-    justify-content: center;
-    padding: 16px 24px 0px;
-    height: calc(100% - 88px);
-}*/
-
 nav.navigation {
     -webkit-box-align: center;
     align-items: center;
@@ -70,13 +60,27 @@ div#main-area {
     border-radius: 8px;
     padding: 32px 56px;
     margin-bottom: 24px;
-    
 }
 
+.comment-header{
+	display: flex;
+	position: relative;
+}
 
 .box-design15 {
   margin: 20px auto;
 }
+
+.bulletin-link{
+	width: 100%;
+}
+
+button.comment-delete-btn {
+    position: absolute;
+    left: 90%;
+    top: 12px;
+}
+
 .box-design15-ttl {
   background-color: #4c9ac0;
   color: #fff;

@@ -2,7 +2,7 @@ import axios from "axios";
 import { Bulletin } from "../../ts/myPageComponentType"
 
 
-export const MyBulletinListComp: React.FC<{bulletins: Bulletin[] | undefined}> = ( {bulletins}) => {
+export const MyBulletinListComp: React.FC<{bulletins: Bulletin[]}> = ( {bulletins}) => {
 	if (bulletins == undefined) {
 		return (
 			<></>

@@ -8,8 +8,8 @@ import axios from "axios";
 
 export const MainContentComp: React.FC<MyPageProps> = ({ activeButton, myDetail }) => {
 
-	const [bulletinList, setBulletinList] = useState<Bulletin[]>();
-	const [comments, setComments] = useState<MyComment[]>();
+	const [bulletinList, setBulletinList] = useState<Bulletin[]>([]);
+	const [comments, setComments] = useState<MyComment[]>([]);
 
 	var urlOrigin: string = new URL(window.location.origin).toString();
 
@@ -34,7 +34,7 @@ export const MainContentComp: React.FC<MyPageProps> = ({ activeButton, myDetail 
 			<div className='content-area' >
 				{activeButton === "userDetails" && <UserDetailComp userDetail={myDetail} />}
 				{activeButton === "myBulletin" && <MyBulletinListComp bulletins={bulletinList} />}
-				{activeButton === "myComment" && <MyCommentListComp myComments={comments} />}
+				{activeButton === "myComment" && <MyCommentListComp myComments={comments} setComments={setComments} />}
 				<MemoizedMapComponent />
 			</div>
 		</>
